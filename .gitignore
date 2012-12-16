@@ -1,0 +1,55 @@
+struct tdatum{
+       int d,m,y;
+       };
+
+struct element {
+       char prezime_ime[30];
+       tdatum datum;
+       float tekuci,devizni;
+       int vrijemeNU,vrijemeT,osoba,vrstatra;
+       };
+       
+struct que {
+       element klijent[10000];
+       int front,rear;
+       };
+       
+que q,shalter,brzi_red,novi;
+int n;
+int placanje_racuna=0;
+typedef que& red;
+
+int AddOne(int n) {
+    return ((n+1)%10000); 
+    }
+    
+element FrontQ(que& q) {
+     if(AddOne(q.rear)==q.front) {
+                                 cout<<"Red je prazan! "<<endl;
+                                 exit(0);
+                                 }
+     return q.klijent[q.front];
+     }
+     
+void EnQueueQ(element x, que& q) {
+     if(AddOne(AddOne(q.rear))==q.front) return;
+                                         
+     q.rear=AddOne(q.rear);
+     q.klijent[q.rear]=x;
+     }
+     
+void DeQueueQ(que& q) {
+     if(AddOne(q.rear)==q.front) return;
+                       
+     q.front=AddOne(q.front);
+     }
+     
+void InitQ(que& q) {
+     q.front=0;
+     q.rear=9999;
+     }
+     
+bool IsEmptyQ(que& q) {
+     if(AddOne(q.rear)==q.front) return true;
+     else return false;
+     }
